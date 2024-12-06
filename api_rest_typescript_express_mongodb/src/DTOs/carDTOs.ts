@@ -1,3 +1,3 @@
 import Car from "../interfaces/car.interface";
 
-export type CarDTO = Omit<Car, "id">;
+export interface CarDTO extends Omit<Car, "id"> {}

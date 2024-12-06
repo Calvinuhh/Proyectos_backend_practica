@@ -2,6 +2,7 @@ import Auth from "../interfaces/auth.interface";
 import User from "../interfaces/user.interface";
 import UserModel from "../models/Users";
 import { hash, compare } from "bcrypt";
+import { generateToken } from "../utils/jwtHandle";
 
 export const registerNewUser = async (data: User): Promise<User> => {
   const user = await UserModel.findOne({ email: data.email });
@@ -18,7 +19,7 @@ export const registerNewUser = async (data: User): Promise<User> => {
   return registerNewUser;
 };
 
-export const loginUser = async (data: Auth): Promise<Auth> => {
+export const loginUser = async (data: Auth): Promise<Object> => {
   const user = await UserModel.findOne({
     email: data.email,
   });
@@ -30,5 +31,10 @@ export const loginUser = async (data: Auth): Promise<Auth> => {
 
   if (!isCorrect) throw Error("Incorrect password");
 
-  return user;
+  const token = generateToken(user.email);
+
+  return {
+    token,
+    user,
+  };
 };

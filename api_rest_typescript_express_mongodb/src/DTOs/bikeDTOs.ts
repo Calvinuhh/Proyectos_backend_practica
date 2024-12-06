@@ -1,3 +1,3 @@
 import Bike from "../interfaces/bike.interface";
 
-export type BikeDTO = Omit<Bike, "id">;
+export interface BikeDTO extends Omit<Bike, "id"> {}

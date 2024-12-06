@@ -2,7 +2,6 @@ import server from "./server";
 import dbConnect from "./db/database";
 
 process.loadEnvFile();
-
 const { PORT } = process.env;
 
 dbConnect()
